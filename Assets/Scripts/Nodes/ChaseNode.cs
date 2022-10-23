@@ -20,7 +20,7 @@ public class ChaseNode : Node
     {
         ai.statusText.text = "Chase";
         float distance = Vector3.Distance(target.position, agent.transform.position);
-        if(distance > 0.2f)
+        if(distance > ai.stoppingDistance)
         {
             agent.isStopped = false;
             agent.SetDestination(target.position);

@@ -335,6 +335,7 @@ MonoBehaviour:
   startingHealth: 100
   lowHealthThreshold: 50
   healthRestoreRate: 1
+  stoppingDistance: 0.2
   chasingRange: 30
   shootingRange: 15
   healthBar: {fileID: 622882152}

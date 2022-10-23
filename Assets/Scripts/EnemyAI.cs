@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float startingHealth;
     [SerializeField] private float lowHealthThreshold;
     [SerializeField] private float healthRestoreRate;
+    public float stoppingDistance;
 
     [SerializeField] private float chasingRange;
     [SerializeField] private float shootingRange;
@@ -21,8 +22,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Cover[] avaliableCovers;
     
     public TextMeshProUGUI statusText; 
-   
-    private Material material;
+
     private Transform bestCoverSpot;
     private NavMeshAgent agent;
 
@@ -79,8 +79,6 @@ public class EnemyAI : MonoBehaviour
         Sequence mainCoverSequence = new Sequence(new List<Node> { healthNode, tryToTakeCoverSelector });
 
         topNode = new Selector(new List<Node> { mainCoverSequence, shootSequence, chaseSequence });
-
-
     }
 
     private void Update()
@@ -111,6 +109,8 @@ public class EnemyAI : MonoBehaviour
     public void SetBestCoverSpot(Transform bestCoverSpot)
     {
         this.bestCoverSpot = bestCoverSpot;
+        healthBar.fillAmount += Time.deltaTime * (healthRestoreRate / 5);
+        currentHealth += Time.deltaTime * healthRestoreRate;
     }
 
     public Transform GetBestCoverSpot()
@@ -131,7 +131,7 @@ public class EnemyAI : MonoBehaviour
         isAttack = false;
         GameObject projectile = Instantiate(enemyData.weapon, this.transform.position + offset, Quaternion.identity);
         projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         isAttack = true;       
     }
 

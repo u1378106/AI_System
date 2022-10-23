@@ -21,7 +21,7 @@ public class GoToCoverNode : Node
             return NodeState.FAILURE;
         ai.statusText.text = "Finding Cover";
         float distance = Vector3.Distance(coverSpot.position, agent.transform.position);
-        if(distance > 0.2f)
+        if(distance > ai.stoppingDistance)
         {
             agent.isStopped = false;
             agent.SetDestination(coverSpot.position);
