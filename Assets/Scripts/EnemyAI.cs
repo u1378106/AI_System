@@ -89,7 +89,6 @@ public class EnemyAI : MonoBehaviour
             statusText.text = "Not Detected";
             agent.isStopped = true;
         }
-        currentHealth += Time.deltaTime * healthRestoreRate;
     }
 
 
